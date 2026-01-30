@@ -1,47 +1,33 @@
 # Arduino-multi-sensor-monitoring-system
 Arduino Uno(Atmega328P) based multi sensor monitoring system using temperature sensor and LDR, with threshold based LED and buzzer alerts. Designed and validated using Autodesk Tinkercad simulation.
-// Pin definitions
-const int tempPin = A0;   // TMP36 / LM35
-const int ldrPin  = A1;   // LDR
-const int ledPin  = 8;    // LED
-const int buzzerPin = 9;  // Buzzer
+# Arduino Multi-Sensor Monitoring System
 
-void setup() {
-  // Set pin modes
-  pinMode(ledPin, OUTPUT);
-  pinMode(buzzerPin, OUTPUT);
+## Project Overview
+Arduino Uno (ATmega328P) based multi-sensor monitoring system using a temperature sensor and LDR, with threshold-based LED and buzzer alerts. Designed and validated using Autodesk Tinkercad simulation.
 
-  // Start Serial Communication
-  Serial.begin(9600);
-  Serial.println("Multi-Sensor Monitoring System Started");
-}
+## Hardware Components
+- Arduino Uno (ATmega328P)
+- Temperature Sensor (TMP36 / LM35)
+- Light Dependent Resistor (LDR)
+- LED with current limiting resistor
+- Active Buzzer
+- Breadboard and jumper wires
 
-void loop() {
-  // Read analog values
-  int tempValue = analogRead(tempPin);
-  int ldrValue  = analogRead(ldrPin);
+## Pin Configuration
+| Component | Arduino Pin |
+|---------|-------------|
+| Temperature Sensor | A0 |
+| LDR | A1 |
+| LED | D8 |
+| Buzzer | D9 |
 
-  // Convert temperature sensor reading to voltage
-  float voltage = tempValue * (5.0 / 1023.0);
+## Description
+- Analog sensors are read using the Arduino ADC
+- Threshold-based logic controls LED and buzzer
+- Serial communication used for debugging
 
-  // Convert voltage to temperature (TMP36 / LM35)
-  float temperatureC = voltage * 100;  // LM35: 10mV per °C
+## Tools Used
+- Arduino IDE
+- Autodesk Tinkercad
+- Embedded C
 
-  // Print values to Serial Monitor
-  Serial.print("Temperature: ");
-  Serial.print(temperatureC);
-  Serial.print(" °C | Light Level: ");
-  Serial.println(ldrValue);
-
-  // Condition for LED and Buzzer
-  if (temperatureC > 30 || ldrValue < 300) {
-    digitalWrite(ledPin, HIGH);
-    digitalWrite(buzzerPin, HIGH);
-    Serial.println("Alert: Threshold Exceeded!");
-  } else {
-    digitalWrite(ledPin, LOW);
-    digitalWrite(buzzerPin, LOW);
-  }
-
-  delay(1000); // 1 second delay
-}
