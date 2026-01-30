@@ -13,11 +13,11 @@ void setup() {
 }
 
 void loop() {
-  int tempValue = analogRead(tempPin);
+  int sensorValue = analogRead(tempPin);
   int ldrValue = analogRead(ldrPin);
 
-  float voltage = tempValue * (5.0 / 1023.0);
-  float temperatureC = voltage * 100.0; // for TMP36/LM35
+  float voltage = sensorValue * (5.0 / 1023.0);
+  float temperatureC = (voltage - 0.5) * 100.0; // for TMP36/LM35
 
   Serial.print("Temp: ");
   Serial.print(temperatureC);
