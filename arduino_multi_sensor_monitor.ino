@@ -1,5 +1,5 @@
 // Pin definitions
-const int tempPin = A0;   // TMP36 / LM35
+const int tempPin = A0;   // TMP36 
 const int ldrPin = A1;    // LDR
 const int ledPin = 8;     // LED
 const int buzzerPin = 9;  // Buzzer
@@ -17,7 +17,7 @@ void loop() {
   int ldrValue = analogRead(ldrPin);
 
   float voltage = sensorValue * (5.0 / 1023.0);
-  float temperatureC = (voltage - 0.5) * 100.0; // for TMP36/LM35
+  float temperatureC = (voltage - 0.5) * 100.0; // for TMP36
 
   Serial.print("Temp: ");
   Serial.print(temperatureC);
